@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_142617) do
+ActiveRecord::Schema.define(version: 2020_04_10_154156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "components", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "error_codes", force: :cascade do |t|
     t.string "number"
@@ -33,6 +39,35 @@ ActiveRecord::Schema.define(version: 2020_04_10_142617) do
     t.string "icon"
     t.string "color"
     t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "phases", force: :cascade do |t|
+    t.string "name"
+    t.text "goal"
+    t.string "charge"
+    t.boolean "heating_system"
+    t.boolean "smoke_extractor"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "problems", force: :cascade do |t|
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stoves", force: :cascade do |t|
+    t.string "name"
+    t.string "rated_heat_output"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
