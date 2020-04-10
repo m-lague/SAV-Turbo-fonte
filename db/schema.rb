@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_131600) do
+ActiveRecord::Schema.define(version: 2020_04_10_142617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "error_codes", force: :cascade do |t|
+    t.string "number"
+    t.integer "code_log"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "error_codes_leds", id: false, force: :cascade do |t|
+    t.bigint "error_code_id", null: false
+    t.bigint "led_id", null: false
+    t.index ["error_code_id"], name: "index_error_codes_leds_on_error_code_id"
+    t.index ["led_id"], name: "index_error_codes_leds_on_led_id"
+  end
 
   create_table "leds", force: :cascade do |t|
     t.string "icon"
