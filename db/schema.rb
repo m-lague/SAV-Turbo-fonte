@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 2020_04_13_124615) do
 
   create_table "alarms", force: :cascade do |t|
     t.text "description"
-    t.bigint "error_codes_id", null: false
+    t.bigint "error_code_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["error_codes_id"], name: "index_alarms_on_error_codes_id"
+    t.index ["error_code_id"], name: "index_alarms_on_error_code_id"
   end
 
   create_table "alarms_leds", force: :cascade do |t|
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2020_04_13_124615) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "alarms", "error_codes", column: "error_codes_id"
+  add_foreign_key "alarms", "error_codes"
   add_foreign_key "alarms_leds", "alarms"
   add_foreign_key "alarms_leds", "leds"
 end
