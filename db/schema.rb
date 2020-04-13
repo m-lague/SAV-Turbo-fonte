@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_095439) do
+ActiveRecord::Schema.define(version: 2020_04_13_124615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alarms", force: :cascade do |t|
+    t.text "description"
+    t.bigint "error_codes_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["error_codes_id"], name: "index_alarms_on_error_codes_id"
+  end
+
+  create_table "alarms_leds", force: :cascade do |t|
+    t.bigint "led_id", null: false
+    t.bigint "alarm_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alarm_id"], name: "index_alarms_leds_on_alarm_id"
+    t.index ["led_id"], name: "index_alarms_leds_on_led_id"
+  end
 
   create_table "components", force: :cascade do |t|
     t.string "name"
@@ -26,13 +43,6 @@ ActiveRecord::Schema.define(version: 2020_04_13_095439) do
     t.integer "code_log"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "error_codes_leds", id: false, force: :cascade do |t|
-    t.bigint "error_code_id", null: false
-    t.bigint "led_id", null: false
-    t.index ["error_code_id"], name: "index_error_codes_leds_on_error_code_id"
-    t.index ["led_id"], name: "index_error_codes_leds_on_led_id"
   end
 
   create_table "leds", force: :cascade do |t|
@@ -106,4 +116,7 @@ ActiveRecord::Schema.define(version: 2020_04_13_095439) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "alarms", "error_codes", column: "error_codes_id"
+  add_foreign_key "alarms_leds", "alarms"
+  add_foreign_key "alarms_leds", "leds"
 end

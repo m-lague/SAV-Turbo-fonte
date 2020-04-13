@@ -1,3 +1,3 @@
 class ErrorCode < ApplicationRecord
-  has_and_belongs_to_many :leds
+  has_one :alarm
 end

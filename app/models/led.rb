@@ -1,4 +1,6 @@
 class Led < ApplicationRecord
-  has_and_belongs_to_many :error_codes
+  has_many :alarms_leds
+  has_many :alarms, through: :alarms_leds
+
   enum status: [:on, :off, :blink]
 end
