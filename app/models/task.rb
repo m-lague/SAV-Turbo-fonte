@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
-  has_and_belongs_to_many :todo_lists
+  has_many :task_todo_lists
+  has_many :todo_lists, through: :task_todo_lists
   enum status: [:not_checked, :checked]
 end

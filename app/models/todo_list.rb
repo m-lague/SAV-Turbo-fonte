@@ -1,4 +1,5 @@
 class TodoList < ApplicationRecord
-  has_and_belongs_to_many :tasks
+  has_many :task_todo_lists
+  has_many :tasks, through: :task_todo_lists
   enum to_do_by: [:customer, :pro]
 end

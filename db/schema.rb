@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_073705) do
+ActiveRecord::Schema.define(version: 2020_04_13_095439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,18 +66,20 @@ ActiveRecord::Schema.define(version: 2020_04_13_073705) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "task_todo_lists", id: false, force: :cascade do |t|
+    t.bigint "todo_list_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_task_todo_lists_on_task_id"
+    t.index ["todo_list_id"], name: "index_task_todo_lists_on_todo_list_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.text "description"
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "tasks_todo_lists", id: false, force: :cascade do |t|
-    t.bigint "task_id", null: false
-    t.bigint "todo_list_id", null: false
-    t.index ["task_id", "todo_list_id"], name: "index_tasks_todo_lists_on_task_id_and_todo_list_id"
-    t.index ["todo_list_id", "task_id"], name: "index_tasks_todo_lists_on_todo_list_id_and_task_id"
   end
 
   create_table "tickets", force: :cascade do |t|
