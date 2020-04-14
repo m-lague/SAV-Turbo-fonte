@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_124615) do
+ActiveRecord::Schema.define(version: 2020_04_14_123055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alarm_probably_causes", force: :cascade do |t|
+    t.bigint "probably_cause_id", null: false
+    t.bigint "alarm_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alarm_id"], name: "index_alarm_probably_causes_on_alarm_id"
+    t.index ["probably_cause_id"], name: "index_alarm_probably_causes_on_probably_cause_id"
+  end
 
   create_table "alarms", force: :cascade do |t|
     t.text "description"
@@ -59,6 +68,12 @@ ActiveRecord::Schema.define(version: 2020_04_13_124615) do
     t.string "charge"
     t.boolean "heating_system"
     t.boolean "smoke_extractor"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "probably_causes", force: :cascade do |t|
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -116,6 +131,8 @@ ActiveRecord::Schema.define(version: 2020_04_13_124615) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "alarm_probably_causes", "alarms"
+  add_foreign_key "alarm_probably_causes", "probably_causes"
   add_foreign_key "alarms", "error_codes"
   add_foreign_key "alarms_leds", "alarms"
   add_foreign_key "alarms_leds", "leds"
