@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_134742) do
+ActiveRecord::Schema.define(version: 2020_04_14_144314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,12 +135,16 @@ ActiveRecord::Schema.define(version: 2020_04_14_134742) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "diagnostic_id"
+    t.index ["diagnostic_id"], name: "index_tickets_on_diagnostic_id"
   end
 
   create_table "todo_lists", force: :cascade do |t|
     t.integer "to_do_by"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "diagnostic_id"
+    t.index ["diagnostic_id"], name: "index_todo_lists_on_diagnostic_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -167,4 +171,6 @@ ActiveRecord::Schema.define(version: 2020_04_14_134742) do
   add_foreign_key "diagnostics", "stoves", column: "stove_id"
   add_foreign_key "displayed_diagnostics", "diagnostics"
   add_foreign_key "displayed_diagnostics", "users"
+  add_foreign_key "tickets", "diagnostics"
+  add_foreign_key "todo_lists", "diagnostics"
 end
