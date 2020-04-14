@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_123055) do
+ActiveRecord::Schema.define(version: 2020_04_14_134742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,30 @@ ActiveRecord::Schema.define(version: 2020_04_14_123055) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "diagnostics", force: :cascade do |t|
+    t.bigint "alarm_id", null: false
+    t.bigint "stove_id", null: false
+    t.bigint "component_id", null: false
+    t.bigint "problem_id", null: false
+    t.bigint "phase_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alarm_id"], name: "index_diagnostics_on_alarm_id"
+    t.index ["component_id"], name: "index_diagnostics_on_component_id"
+    t.index ["phase_id"], name: "index_diagnostics_on_phase_id"
+    t.index ["problem_id"], name: "index_diagnostics_on_problem_id"
+    t.index ["stove_id"], name: "index_diagnostics_on_stove_id"
+  end
+
+  create_table "displayed_diagnostics", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "diagnostic_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["diagnostic_id"], name: "index_displayed_diagnostics_on_diagnostic_id"
+    t.index ["user_id"], name: "index_displayed_diagnostics_on_user_id"
   end
 
   create_table "error_codes", force: :cascade do |t|
@@ -136,4 +160,11 @@ ActiveRecord::Schema.define(version: 2020_04_14_123055) do
   add_foreign_key "alarms", "error_codes"
   add_foreign_key "alarms_leds", "alarms"
   add_foreign_key "alarms_leds", "leds"
+  add_foreign_key "diagnostics", "alarms"
+  add_foreign_key "diagnostics", "components"
+  add_foreign_key "diagnostics", "phases"
+  add_foreign_key "diagnostics", "problems"
+  add_foreign_key "diagnostics", "stoves", column: "stove_id"
+  add_foreign_key "displayed_diagnostics", "diagnostics"
+  add_foreign_key "displayed_diagnostics", "users"
 end
