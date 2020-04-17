@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :stoves, only: [:index]
   resources :stoves, only: [:show], as: :stove do
-    resources :diagnostics, only: [:index]
+    resources :diagnostics, only: [:index, :show]
   end
 
 

@@ -3,8 +3,6 @@
 <ul><% @diagnostics.each do |diag| %>
   <li><%= diag.alarm.error_code.number %>
       <%= diag.alarm.description  %>
-      <%= diag.alarm.leds.each { |led| "#{led.icon} #{led.color} #{led.status}"} %>
-      <%= diag.alarm.probably_causes.each { |cause| cause.description}  %>
-  </li>
+      <%= link_to "selectionner", stove_diagnostic_path(@stove, diag)  %>
   <% end %>
 </ul>
