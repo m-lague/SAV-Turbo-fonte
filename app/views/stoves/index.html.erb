@@ -2,7 +2,7 @@
 <% @stoves.each do |stove| %>
   <li><%= stove.name %>
       <%= stove.rated_heat_output  %>
-      <%= link_to "voir", "#" %>
+      <%= link_to "voir", stove_path(stove) %>
       </li>
 <% end %>
 </ul>

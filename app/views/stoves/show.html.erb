@@ -1,0 +1,15 @@
+<h2><%= @stove.name %></h2>
+<p>puissance = <%= @stove.rated_heat_output %></p>
+
+<div>
+  <h3>Caractéristiques :</h3>
+  <ul>
+    <li>puissance mini:</li>
+    <li>puissance max:</li>
+    <li>hauteur</li>
+    <li>largeur</li>
+    <li>etc..</li>
+  </ul>
+</div>
+
+<%= link_to "faire un diagnostic", "#",class: "btn btn-danger" %>
