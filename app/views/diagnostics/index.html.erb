@@ -1,0 +1,8 @@
+<h2>Diagnostics</h2>
+
+<ul><% @diagnostics.each do |diag| %>
+  <li><%= diag.alarm.error_code.number %>
+      <%= diag.alarm.description  %>
+      <%= link_to "selectionner", stove_diagnostic_path(@stove, diag)  %>
+  <% end %>
+</ul>

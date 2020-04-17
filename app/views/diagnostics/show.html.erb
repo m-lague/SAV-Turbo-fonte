@@ -1,0 +1,10 @@
+<ul>
+  <h3>Causes probables :</h3>
+
+    <% @diagnostic.alarm.probably_causes.each do |cause| %>
+      <li><%= cause.description %></li>
+    <% end %>
+
+</ul>
+
+
