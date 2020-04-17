@@ -1,0 +1,10 @@
+<h2>Diagnostics</h2>
+
+<ul><% @diagnostics.each do |diag| %>
+  <li><%= diag.alarm.error_code.number %>
+      <%= diag.alarm.description  %>
+      <%= diag.alarm.leds.each { |led| "#{led.icon} #{led.color} #{led.status}"} %>
+      <%= diag.alarm.probably_causes.each { |cause| cause.description}  %>
+  </li>
+  <% end %>
+</ul>
