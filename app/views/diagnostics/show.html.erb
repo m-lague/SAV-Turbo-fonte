@@ -4,8 +4,9 @@
     <% @diagnostic.alarm.probably_causes.each do |cause| %>
       <li><%= cause.description %></li>
     <% end %>
-
 </ul>
+<p>Problème : <%= @diagnostic.problem.description %></p>
+<p>Composant : <%= @diagnostic.component.name  %></p>
 
 <ul><% @diagnostic.todo_lists.each do |list|  %>
  <p> <%= list.to_do_by  %></p>
