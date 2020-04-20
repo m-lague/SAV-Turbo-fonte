@@ -1,7 +1,7 @@
 class DiagnosticsController < ApplicationController
   def index
-    @diagnostics = Diagnostic.all
     @stove = Stove.find(params[:stove_id])
+    @diagnostics = Diagnostic.where(stove: @stove)
   end
 
   def show
