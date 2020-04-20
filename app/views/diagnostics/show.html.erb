@@ -8,12 +8,12 @@
 </ul>
 
 <ul><% @diagnostic.todo_lists.each do |list|  %>
-  <%= list.to_do_by  %>
+ <p> <%= list.to_do_by  %></p>
   <% list.tasks.each do |task| %>
    <li> <%= task.description  %>
    <%= task.status  %></li>
    <% end %>
-
+<p></p>
   <% end %>
 
   </ul>
