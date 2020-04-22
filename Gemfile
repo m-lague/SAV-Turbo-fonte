@@ -24,6 +24,7 @@ end
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'pry'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

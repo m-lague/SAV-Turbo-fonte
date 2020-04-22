@@ -1,16 +1,17 @@
 class StovesController < ApplicationController
-  # before_action find_stove, only: :show
+  before_action :set_stove, only: :show
+
   def index
-    @stoves = Stove.all
+    @stoves = policy_scope(Stove)
   end
 
   def show
-    @stove = Stove.find(params[:id])
   end
 
   private
 
-  def find_stove
+  def set_stove
     @stove = Stove.find(params[:id])
+    authorize @stove
   end
 end
