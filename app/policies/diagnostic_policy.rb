@@ -6,5 +6,8 @@ class DiagnosticPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
 
 end
