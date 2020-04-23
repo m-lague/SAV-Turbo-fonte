@@ -1,8 +1,7 @@
 class DiagnosticsController < ApplicationController
   before_action :set_diagnostic, only: :show
   def index
-    # @stove = Stove.find(params[:stove_id])
-    @diagnostics = policy_scope(Diagnostic)
+    @diagnostics = policy_scope(Diagnostic).where(stove_id: params[:stove_id])
   end
 
   def show

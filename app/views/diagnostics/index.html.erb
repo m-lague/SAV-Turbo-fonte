@@ -3,7 +3,6 @@
 <ul><% @diagnostics.each do |diag| %>
   <li><%= diag.alarm.error_code.number %>
       <%= diag.alarm.description  %>
-      <%= link_to "selectionner", stove_diagnostic_path(@stove, diag)  %>
+      <%= link_to "selectionner", stove_diagnostic_path(diag.stove, diag)  %>
   <% end %>
 </ul>
-<!-- # <% binding.pry %> -->
