@@ -3,9 +3,11 @@ class StovesController < ApplicationController
 
   def index
     @stoves = policy_scope(Stove)
+    @stove = Stove.new
   end
 
   def show
+
   end
 
   private
