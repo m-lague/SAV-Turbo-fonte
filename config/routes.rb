@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'diagnostics/show'
+
   devise_for :users
   root to: 'pages#home'
-  resources :stoves, only: [:index]
+
+  get 'stoves' , to: 'stoves#index'
   resources :stoves, only: [:show], as: :stove do
     resources :diagnostics, only: [:index, :show]
   end
