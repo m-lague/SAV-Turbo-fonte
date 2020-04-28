@@ -1,21 +1,6 @@
-<div class="list-group list-group-flush">
+<div class="list-group list-group-flush text-center">
   <% @stoves.each do |stove| %>
     <%= link_to "#{stove.name} #{stove.rated_heat_output}", stove_path(stove), class: "list-group-item list-group-item-action" %>
   <% end %>
 </div>
 
-<!--
-<%= form_with model: @stove, method: :get, action: "" do |s| %>
-  <%= s.collection_select(:id, @stoves, :id, :name) %>
-  <%= link_to "Voir" %>
-  <%= submit_tag "Search" %>
-<% end %>
-
-
-
-<%= simple_form_for @stove, method: :get do |f| %>
-  <%= f.input :name, collection: @stoves, prompt: "Sélectionner un poêle", label: false %>
-  <%= f.input :rated_heat_output  %>
-  <%= f.button :submit , "Voir", class: "btn btn-primary", url: "stoves/:id"%>
-<% end %>
-  -->

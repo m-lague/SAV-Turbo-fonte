@@ -1,8 +1,7 @@
 <h2>Diagnostics</h2>
 
-<ul><% @diagnostics.each do |diag| %>
-  <li><%= diag.alarm.error_code.number %>
-      <%= diag.alarm.description  %>
-      <%= link_to "selectionner", stove_diagnostic_path(diag.stove, diag)  %>
+<div class="list-group list-group-flush">
+  <% @diagnostics.each do |diag| %>
+    <%= link_to "#{diag.alarm.error_code.number} #{diag.alarm.description} #{diag.alarm.leds.first.icon} #{diag.alarm.leds.first.color}", stove_diagnostic_path(params[:stove_id], diag), class: "list-group-item list-group-item-action" %>
   <% end %>
-</ul>
+</div>
