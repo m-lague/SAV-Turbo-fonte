@@ -1,14 +1,13 @@
 <h1>Diag</h1>
-<%=  @displayed_diagnostic%>
+
 
 
 <%= simple_form_for @displayed_diagnostic do |f| %>
-  <%= f.error_notification  %>
+  <%= f.error_notification %>
   <%= f.association :diagnostic do |c| %>
-      <%=  c.input :alarm, collection: Alarm.all.map { |a| a.error_code.number }%>
-      <%=  c.input :leds, as: :check_boxes, collection: Led.not_off.map { |l| "#{l.icon} #{l.color} #{l.status}" }, wrapper: :vertical_collection_inline %>
-      <%=  c.input :phase, collection: Phase.where(stove_id: params[:stove_id]).map { |ph| "#{ph.duration / 60} min"} %>
-      <%= c.input :stove_id , as: :hidden, value_method: params[:stove_id]%>
+      <%= c.input :error_code, collection: @error_codes%>
+      <%= c.input :leds, collection: @leds,as: :check_boxes, wrapper: :vertical_collection_inline,value_method: :id, label_method: :to_label %>
+      <%= c.input :phase_id, collection: @phases, hint: "Phase durant laquelle l'alarm s'est déclenchée. Laissez vide si vous ne savez pas" %>
   <% end %>
 
   <%= f.button :submit, "Voir", class: "btn btn-primary" %>
