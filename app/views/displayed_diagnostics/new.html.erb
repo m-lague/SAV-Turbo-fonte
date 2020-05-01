@@ -1,0 +1,14 @@
+<h1>Diag</h1>
+
+
+
+<%= simple_form_for @displayed_diagnostic do |f| %>
+  <%= f.error_notification %>
+  <%= f.association :diagnostic do |c| %>
+      <%= c.input :error_code, collection: @error_codes%>
+      <%= c.input :leds, collection: @leds,as: :check_boxes, wrapper: :vertical_collection_inline,value_method: :id, label_method: :to_label %>
+      <%= c.input :phase_id, collection: @phases, hint: "Phase durant laquelle l'alarm s'est déclenchée. Laissez vide si vous ne savez pas" %>
+  <% end %>
+
+  <%= f.button :submit, "Voir", class: "btn btn-primary" %>
+<% end %>
