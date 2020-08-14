@@ -1,7 +1,7 @@
 Ticket.destroy_all
 puts "tickets deleted..."
 
-TaskTodoList.destroy_all
+TaskTodoList.delete_all
 Task.destroy_all
 TodoList.destroy_all
 puts "tasks & todo_lists deleted..."
@@ -76,23 +76,26 @@ end
 
 puts "#{Phase.count} phases created !"
 
-problems.each do |problem|
-  Problem.create(description: problem)
-end
-
+# problems.each do |problem|
+#   Problem.create(description: problem)
+# end
+Problem.create(description: "le débimètre mesure une dépression soit nulle soit en dessous de la valeur cible")
 puts "#{Problem.count} problems created !"
 
-components.each do |component|
-  Component.create(name: component)
-end
+# components.each do |component|
+#   Component.create(name: component)
+# end
+Component.create(name: "Débimètre")
 
 puts "#{Component.count} components created !"
 
 
 
-error_codes.each do |error_code|
-  ErrorCode.create(number: error_code)
-end
+# error_codes.each do |error_code|
+#   ErrorCode.create(number: error_code)
+# end
+code_log_241 = ErrorCode.create(number: "----", code_log: 241)
+code_log_253 = ErrorCode.create(number: "----", code_log: 253)
 
 puts "#{ErrorCode.count} error_codes created"
 
@@ -101,19 +104,24 @@ probably_causes.each do |probably_cause|
 end
 puts "#{ProbablyCause.count} probably_causes created"
 
-led_names.each do |led|
-  led_colors.each do |color|
-    Led.create(icon: led, color: color, status: rand(0..2))
-  end
-end
+# led_names.each do |led|
+#   led_colors.each do |color|
+#     Led.create(icon: led, color: color, status: rand(0..2))
+#   end
+# end
+led_balai = Led.create(name: "balai", color: "orange", status: 1)
+led_tremie = Led.create(name: "tremie", color: "orange",status: 1)
 puts "#{Led.count} leds created !"
 
-alarms.each do |description|
-  error_code = ErrorCode.all[rand(0...ErrorCode.count)]
-  a = Alarm.create(description: description, error_code: error_code)
-  a.leds << Led.all[rand(0...Led.count)]
-  a.probably_causes << ProbablyCause.all[rand(0...ProbablyCause.count)]
-end
+# alarms.each do |description|
+#   error_code = ErrorCode.all[rand(0...ErrorCode.count)]
+#   a = Alarm.create(description: description, error_code: error_code)
+#   a.leds << Led.all[rand(0...Led.count)]
+#   a.probably_causes << ProbablyCause.all[rand(0...ProbablyCause.count)]
+# end
+
+Alarm.create(description: "Problème de dépression - conduit sale ou entrée d'air insuffisante", error_code: code_log_241).leds << led_balai
+Alarm.create(description: "Allumage raté ou température fumée insuffisante", error_code: code_log_253).leds << led_tremie
 
 puts "#{Alarm.count} alarms creeated !"
 
@@ -122,6 +130,8 @@ tasks.each do |task|
 end
 
 puts "#{Task.count} tasks created !"
+
+Diagnostic.create(alarm: Alarm.first, stove: Stove.first, phase: Phase.first, component: Component.first, problem: Problem.first )
 
 
 

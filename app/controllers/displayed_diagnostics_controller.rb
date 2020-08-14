@@ -14,14 +14,26 @@ class DisplayedDiagnosticsController < ApplicationController
   end
 
   def create
-    # TODO récupérer les leds allumées
+
     error_code = ErrorCode.find_by number: params[:displayed_diagnostic][:diagnostic][:error_code]
-    # TODO retrouver l'alarme en fonction du code erreur et des leds
-    alarm = Alarm.find_by error_code: error_code
+
+
+    params[:displayed_diagnostic][:diagnostic][:leds].shift
+
+    leds = []
+    params[:displayed_diagnostic][:diagnostic][:leds].each do |id|
+      leds << Led.find(id)
+    end
+
+    alarms = Alarm.where(error_code: error_code)
+    alarm = alarms.find {|alarm| alarm.leds == leds}
+
+    # binding.pry
 
     phase = Phase.find(params[:displayed_diagnostic][:diagnostic][:phase_id])
 
     stove = Stove.find(flash[:stove_id])
+
 
     diag = Diagnostic.find_by(alarm: alarm, phase: phase, stove: stove)
 
@@ -41,6 +53,6 @@ class DisplayedDiagnosticsController < ApplicationController
   private
 # TODO vérifier qu'on ne puisse pas passer de paramètres cachés depuis le formulaire new
   def displayed_diagnostic_params
-    params.require(:displayed_diagnostic).permit(:diagnostic[:error_code], :diagnostic[:leds], :diagnostic[:phase], :diagnostic[:stove_id])
+    params.require(:displayed_diagnostic).permit(:diagnostic[:error_code], :diagnostic[:leds], :diagnostic[:phase_id])
   end
 end

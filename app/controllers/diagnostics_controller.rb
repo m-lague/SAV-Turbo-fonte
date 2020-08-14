@@ -7,6 +7,9 @@ class DiagnosticsController < ApplicationController
   def show
 
   end
+  def create
+    # TODO créer les formulaires de création de diagnostics pour le SAV
+  end
 
   private
 

@@ -18,8 +18,8 @@
 </div>
 <p></p>
 
-<ul><% @diagnostic.todo_lists.customer.each do |list|  %>
- <p> À faire par le Client :</p>
+<ul><% @diagnostic.todo_lists.each do |list|  %>
+ <p> À faire par le <%= list.to_do_by %> :</p>
   <% list.tasks.each do |task| %>
    <li> <%= task.description  %>
    <%= task.status  %></li>
