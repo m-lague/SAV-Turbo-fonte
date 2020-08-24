@@ -6,7 +6,7 @@ gem 'devise'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma', '>= 4.3.5'
-gem 'rails', '6.0.2.2'
+gem 'rails', '6.0.3.1'
 gem 'redis'
 gem 'pundit'
 
@@ -16,7 +16,6 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem "activesupport", ">= 6.0.3.1"
 
 group :development do
   gem 'web-console', '>= 3.3.0'
